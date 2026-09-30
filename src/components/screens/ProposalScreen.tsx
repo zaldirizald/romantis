@@ -98,22 +98,19 @@ export default function ProposalScreen({ onYes }: { onYes: () => void }) {
 
         {stage >= 2 && (
           <div className="mt-12 flex flex-col items-center gap-6">
-            <motion.p
-              initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif-display text-5xl font-medium text-off-white sm:text-6xl"
-            >
-              {p.big[0]}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif-display text-balance text-5xl font-medium italic text-blush sm:text-6xl"
-            >
-              {p.big[1]}
-            </motion.p>
+            {p.big.map((line, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 1.2, delay: i * 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className={`font-serif-display text-balance text-5xl font-medium sm:text-6xl ${
+                  i === p.big.length - 1 && p.big.length > 1 ? "italic text-blush" : "text-off-white"
+                }`}
+              >
+                {line}
+              </motion.p>
+            ))}
 
             {/* photo — subtle, small, tilted like a keepsake */}
             <motion.div
